@@ -1,0 +1,22 @@
+{
+  "name": "serverless_discord_lfg_bot",
+  "version": "1.0.0",
+  "description": "Looking for group serverless discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayfry1077/serverless_discord_LFG_bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayfry1077/serverless_discord_LFG_bot/issues"
+  },
+  "homepage": "https://github.com/jayfry1077/serverless_discord_LFG_bot#readme",
+  "dependencies": {
+    "serverless-iam-roles-per-function": "^3.0.1"
+  }
+}
