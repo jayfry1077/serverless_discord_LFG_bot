@@ -20,7 +20,7 @@ def main(event, context):
 
     channel_id = body['channel_id']
 
-    if body['data']['name'] == 'lfg_create_group':
+    if body['data']['name'] == 'lfg_create':
         group_creator = f"{body['member']['user']['username']}#{body['member']['user']['discriminator']}"
         options = body['data']['options']
         group_name = ''

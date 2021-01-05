@@ -10,31 +10,11 @@ load_dotenv()
 bot_id = os.getenv('bot_id')
 bot_key = os.getenv('bot_key')
 
-url = f"https://discord.com/api/v8/applications/{bot_id}/commands"
 
 json = {
-    "name": "lfg_create_group",
-    "description": "Create a group",
-    "options": [
-        {
-            "name": "group_name",
-            "description": "Group Name, Must be Unique",
-            "type": 3,
-            "required": True,
-        },
-        {
-            "name": "group_size",
-            "description": "Specify a group size.",
-            "type": 3,
-            "required": False,
-        },
-        {
-            "name": "group_description",
-            "description": "Specify a group description",
-            "type": 3,
-            "required": False,
-        },
-    ]
+    "name": "lfg_get_group",
+    "description": "Returns a specific group.",
+    "options": []
 }
 
 
@@ -43,17 +23,25 @@ headers = {
 }
 
 
-def update_commands():
+def update_commands(url):
     r = requests.post(url, headers=headers, json=json)
 
     print(r.content)
 
 
-def get_commands():
+def get_commands(url):
     r = requests.get(url, headers=headers)
 
     print(r.content)
 
 
-# update_commands()
-# get_commands()
+def delete_commands(url):
+    r = requests.delete(url, headers=headers)
+
+    print(r.content)
+
+
+# update_commands(f"https://discord.com/api/v8/applications/{bot_id}/commands")
+# get_commands(f"https://discord.com/api/v8/applications/{bot_id}/commands")
+# delete_commands(
+#     f"https://discord.com/api/v8/applications/{bot_id}/commands/795860522007920650")
