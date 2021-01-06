@@ -13,7 +13,7 @@ package:
 
 functions:
   bot:
-    handler: src/bot.main
+    handler: src/handler.main
     timeout: 15
     memorySize: 512
     events:
