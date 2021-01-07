@@ -120,7 +120,7 @@ def delete_commands(url):
     print(r.content)
 
 
-update_commands(f"https://discord.com/api/v8/applications/{bot_id}/commands")
+# update_commands(f"https://discord.com/api/v8/applications/{bot_id}/commands")
 # get_commands(f"https://discord.com/api/v8/applications/{bot_id}/commands")
 # delete_commands(
 #     f"https://discord.com/api/v8/applications/{bot_id}/commands/795912485793431583")

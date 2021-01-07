@@ -2,11 +2,15 @@ Resources:
   queueTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: lfg-bot-${self:provider.stage}
+      TableName: lfg-serverless-bot-${self:provider.stage}
       AttributeDefinitions:
         - AttributeName: PK
           AttributeType: S
         - AttributeName: SK
+          AttributeType: S
+        - AttributeName: availiable
+          AttributeType: S
+        - AttributeName: guild_id
           AttributeType: S
       KeySchema:
         - AttributeName: PK
@@ -14,6 +18,15 @@ Resources:
         - AttributeName: SK
           KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "full_group_index"
+          KeySchema:
+            - AttributeName: availiable
+              KeyType: HASH
+            - AttributeName: guild_id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
       TimeToLiveSpecification:
         AttributeName: TTL
         Enabled: True

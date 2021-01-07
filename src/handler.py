@@ -21,14 +21,14 @@ def main(event, context):
     if body['type'] == 1:
         return DISCORD_PING_PONG
 
-    channel_id = body['channel_id']
+    guild_id = body['guild_id']
     command = body['data']['name']
     sub_command = body['data']['options'][0]['name']
 
     if command == 'lfg' and sub_command == 'create_group':
 
         try:
-            message = bot.create_group(channel_id, body)
+            message = bot.create_group(guild_id, body)
             return discord_funcs.discord_body(200, 3, message)
         except Exception as e:
             return discord_funcs.discord_body(
@@ -37,7 +37,7 @@ def main(event, context):
     elif command == 'lfg' and sub_command == 'join_group':
 
         try:
-            message = bot.join_group(channel_id, body)
+            message = bot.join_group(guild_id, body)
             return discord_funcs.discord_body(200, 3, message)
         except Exception as e:
             return discord_funcs.discord_body(
@@ -46,7 +46,7 @@ def main(event, context):
     elif command == 'lfg' and sub_command == 'leave_group':
 
         try:
-            message = bot.leave_group(channel_id, body)
+            message = bot.leave_group(guild_id, body)
             return discord_funcs.discord_body(200, 3, message)
         except Exception as e:
             return discord_funcs.discord_body(
@@ -55,8 +55,20 @@ def main(event, context):
     elif command == 'lfg' and sub_command == 'get_group':
 
         try:
-            message = bot.get_group(channel_id, body)
+            message = bot.get_group(guild_id, body)
             return discord_funcs.discord_body(200, 3, message)
         except Exception as e:
             return discord_funcs.discord_body(
                 200, 4, f'Unable to get group. Error: {e}.')
+
+    elif command == 'lfg' and sub_command == 'get_groups':
+
+        try:
+            message = bot.get_groups(guild_id, body)
+            return discord_funcs.discord_body(200, 3, message)
+        except Exception as e:
+            return discord_funcs.discord_body(
+                200, 4, f'Unable to find groups. Error: {e}.')
+
+    else:
+        return discord_funcs.discord_body(200, 4, 'Unable to process command.')
