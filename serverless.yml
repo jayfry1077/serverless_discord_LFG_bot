@@ -1,0 +1,50 @@
+service: serverless-discord-lfg-bot
+
+provider:
+  name: aws
+  runtime: python3.8
+
+package:
+  individually: true
+  exclude:
+    - node_modules/**
+    - env.json
+    - resources/**
+
+functions:
+  bot:
+    handler: src/handler.main
+    timeout: 15
+    memorySize: 512
+    events:
+      - http:
+          method: post
+          cors: true
+          path: lfg
+          private: false
+    environment:
+      DYNAMODB_TABLE_NAME: lfg-serverless-bot-${self:provider.stage}
+      DISCORD_PUBLIC_KEY: ${file(./env.json):DISCORD_PUBLIC_KEY}
+    layers:
+      - arn:aws:lambda:us-east-1:965958012583:layer:salt:1
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - dynamodb:DescribeTable
+          - dynamodb:Query
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+        Resource:
+          - arn:aws:dynamodb:*:${self:custom.account.${self:provider.stage}}:table/lfg-serverless-bot-${self:provider.stage}
+          - arn:aws:dynamodb:*:${self:custom.account.${self:provider.stage}}:table/lfg-serverless-bot-${self:provider.stage}/index/full_group_index
+
+plugins:
+  - serverless-iam-roles-per-function
+
+resources:
+  - ${file(resources/dynamodb.yml)}
+
+custom:
+  account:
+    dev: ${file(./env.json):DEV_ACCOUNT_ID}
