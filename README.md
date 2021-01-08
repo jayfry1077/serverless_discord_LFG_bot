@@ -1,18 +1,22 @@
 # serverless_discord_LFG_bot
 
-Looking for group serverless discord bot. This bot lets you creat "groups" with descriptions and size limits. People in your channel can join a group, and when the group is full the bot will reply and let you know.
+Looking for group serverless discord bot. This bot lets you creat "groups" with descriptions and size limits. People in your channel can join a group, and when the group is full the bot will reply and let you know. Thest best part is the serverless part. The bot will work 24/7 but it doesn't have to be hosted 24/7, so you only pay for what you use!
 
-It's great if you want to play a game, you join LFG and when others want to play as well you can get gaming. Think of it like WoW dungeon finder or other games that do group finder, just less flashy.
+It's great if you want to play a game, you join / create a group and when others want to play as well, they can join the group and once its full you can get gaming. Think of it like WoW dungeon finder or other games that do group finder, just less flashy.
 
 All of the group data is saved in DynamoDB and expires after 24 hours. If you run it on a low population discord server its likely to be free to run or near free.
 
-Higher populations will cost you, but the dynamoDB queries are optimize to cost as little as possible (There are no scans!)
+Higher usage will cost you, but the dynamoDB queries are optimized to cost as little as possible (There are no scans!)
 
 Feedback welcome!
 
 # Setup
 
-The goal for me was to make this so anyone with an AWS account can deploy the stack and get a bot working. The serverless.yml file attaches will build all the infrastructure you need. It also injects the variable names you need into the lambda env variables.
+To use serverless you'll need Node and the serverless framework installed.
+
+https://www.serverless.com/framework/docs/providers/aws/guide/installation/
+
+The goal for me was to make this so anyone with an AWS account can deploy the stack and get a bot working. The serverless.yml file attached will build all the infrastructure you need. It also injects the variable names you need into the lambda env variables.
 
 My inspiration was this post on mendium. https://oozio.medium.com/serverless-discord-bot-55f95f26f743
 
@@ -30,7 +34,7 @@ These can be gotten from the Discord developer portal when you create your appli
 The other big thing you have to set up is the nacl lambda layer. Here is a guide you can follow for that.
 https://medium.com/@geoff.ford_33546/creating-a-pynacl-lambda-layer-c3f2e1b6ff11
 
-In there serverless YML there is an <ENTER YOUR LAYER ARN HERE> section that you should all your layer ARN. Otherwise the lambda will not be able to verfy the signature of the Discord POST request.
+In there serverless YML there is an <ENTER YOUR LAYER ARN HERE> section. Otherwise the lambda will not be able to verfy the signature of the Discord POST request.
 
 # Registering Commands
 
