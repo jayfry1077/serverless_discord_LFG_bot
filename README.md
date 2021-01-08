@@ -1,6 +1,14 @@
 # serverless_discord_LFG_bot
 
-Looking for group serverless discord bot
+Looking for group serverless discord bot. This bot lets you creat "groups" with descriptions and size limits. People in your channel can join a group, and when the group is full the bot will reply and let you know.
+
+It's great if you want to play a game, you join LFG and when others want to play as well you can get gaming. Think of it like WoW dungeon finder or other games that do group finder, just less flashy.
+
+All of the group data is saved in DynamoDB and expires after 24 hours. If you run it on a low population discord server its likely to be free to run or near free.
+
+Higher populations will cost you, but the dynamoDB queries are optimize to cost as little as possible (There are no scans!)
+
+Feedback welcome!
 
 # Setup
 
