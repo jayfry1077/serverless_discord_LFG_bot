@@ -24,8 +24,8 @@ They give really good examples to get set up with discord bots. Please check out
 
 There are some variables that you will have to provide yourself.
 
-1. DISCORD_PUBLIC_KEY
-2. DEV_ACCOUNT_ID
+1. DISCORD_PUBLIC_KEY (Gotten from Discord devloper portal)
+2. DEV_ACCOUNT_ID (Your AWS Account ID)
 
 Place these into an env.json file in the same diretory as the serverless file. They will be read into the lambda environment variables.
 
@@ -35,6 +35,12 @@ The other big thing you have to set up is the nacl lambda layer. Here is a guide
 https://medium.com/@geoff.ford_33546/creating-a-pynacl-lambda-layer-c3f2e1b6ff11
 
 In there serverless YML there is an <ENTER YOUR LAYER ARN HERE> section. Otherwise the lambda will not be able to verfy the signature of the Discord POST request.
+
+# Deployment
+
+Once you haver everything set up just run
+
+sls deploy --stage dev
 
 # Registering Commands
 
