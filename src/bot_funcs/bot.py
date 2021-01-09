@@ -19,7 +19,9 @@ def create_group(guild_id, body):
             group_name = op['value']
         elif op['name'] == 'size':
             group_size = op['value']
-            if type(group_size) != int:
+            try:
+                group_size = int(group_size)
+            except:
                 input_type = type(group_size)
                 raise Exception(
                     f'Group size must be an integer, not {input_type}.')
